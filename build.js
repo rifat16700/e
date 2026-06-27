@@ -9,7 +9,7 @@ const configJs = `// ===========================================================
 
 var CONFIG = {
     // ── DB Provider ──────────────────────────────────────────
-    DB_PROVIDER: '${s(process.env.DB_PROVIDER) || 'supabase'}',
+    DB_PROVIDER: '${s(process.env.DB_PROVIDER) || 'cf_db'}',
 
     // ── Supabase ─────────────────────────────────────────────
     SUPABASE_URL:      '${s(process.env.SUPABASE_URL)}',
@@ -21,6 +21,8 @@ var CONFIG = {
     APPWRITE_DATABASE_ID: '${s(process.env.APPWRITE_DATABASE_ID)}',
 
     // ── Cloudflare D1 (Read Only) ────────────────────────────
+    CF_ACCOUNT_ID:    '${s(process.env.CF_ACCOUNT_ID)}',
+    CF_DB_ID:         '${s(process.env.CF_DB_ID)}',
     CF_D1_READ_TOKEN: '${s(process.env.CF_D1_READ_TOKEN)}',
 
     // ── Frontend Constants ───────────────────────────────────
