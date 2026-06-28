@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders — Admin Panel</title>
+    <title>Orders â€” Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/admin.css">
     <script src="../assets/js/config.js?v=1782024132023"></script>
@@ -33,7 +33,7 @@
     <main class="admin-main" id="adminMain" style="display:none;">
         <header class="admin-header">
             <div class="header-left">
-                <button class="hamburger-btn" onclick="openSidebar()">☰</button>
+                <button class="hamburger-btn" onclick="openSidebar()">â˜°</button>
                 <div>
                     <div class="page-title">Orders</div>
                     <div class="page-subtitle" id="orderCountSub">Loading...</div>
@@ -55,12 +55,12 @@
                 <!-- Inline filters (hidden on mobile, shown via panel) -->
                 <select class="form-select filter-inline" id="statusFilter" onchange="filterOrders();updateFilterCount()" style="width:auto;min-width:160px;">
                     <option value="">All Status</option>
-                    <option value="Pending">⏛ Pending</option>
-                    <option value="Confirmed">✅ Confirmed</option>
-                    <option value="Processing">🔄 Processing</option>
-                    <option value="Shipped">🚚 Shipped</option>
-                    <option value="Delivered">🎉 Delivered</option>
-                    <option value="Cancelled">❌ Cancelled</option>
+                    <option value="Pending">â› Pending</option>
+                    <option value="Confirmed">âœ… Confirmed</option>
+                    <option value="Processing">ðŸ”„ Processing</option>
+                    <option value="Shipped">ðŸšš Shipped</option>
+                    <option value="Delivered">ðŸŽ‰ Delivered</option>
+                    <option value="Cancelled">âŒ Cancelled</option>
                 </select>
                 <select class="form-select filter-inline" id="payFilter" onchange="filterOrders();updateFilterCount()" style="width:auto;min-width:150px;">
                     <option value="">All Payment</option>
@@ -75,8 +75,8 @@
                 </select>
                 <select class="form-select filter-inline" id="typeFilter" onchange="filterOrders();updateFilterCount()" style="width:auto;min-width:140px;">
                     <option value="">All Types</option>
-                    <option value="delivery">🚚 Delivery</option>
-                    <option value="pickup">🚶 Pickup</option>
+                    <option value="delivery">ðŸšš Delivery</option>
+                    <option value="pickup">ðŸš¶ Pickup</option>
                 </select>
                 <label class="filter-inline" style="display:flex; align-items:center; gap:6px; cursor:pointer; color:var(--text-secondary); font-size:13px; font-weight:600; padding:0 10px; white-space:nowrap;">
                     <input type="checkbox" id="failedFilter" onchange="filterOrders();updateFilterCount()" style="width:16px;height:16px;cursor:pointer;accent-color:#ff3b30;">
@@ -89,12 +89,12 @@
                 <div class="filter-panel-row">
                     <select class="form-select" id="statusFilterM" onchange="syncMobileFilter('statusFilter','statusFilterM');filterOrders();updateFilterCount()">
                         <option value="">All Status</option>
-                        <option value="Pending">⏛ Pending</option>
-                        <option value="Confirmed">✅ Confirmed</option>
-                        <option value="Processing">🔄 Processing</option>
-                        <option value="Shipped">🚚 Shipped</option>
-                        <option value="Delivered">🎉 Delivered</option>
-                        <option value="Cancelled">❌ Cancelled</option>
+                        <option value="Pending">â› Pending</option>
+                        <option value="Confirmed">âœ… Confirmed</option>
+                        <option value="Processing">ðŸ”„ Processing</option>
+                        <option value="Shipped">ðŸšš Shipped</option>
+                        <option value="Delivered">ðŸŽ‰ Delivered</option>
+                        <option value="Cancelled">âŒ Cancelled</option>
                     </select>
                     <select class="form-select" id="payFilterM" onchange="syncMobileFilter('payFilter','payFilterM');filterOrders();updateFilterCount()">
                         <option value="">All Payment</option>
@@ -111,8 +111,8 @@
                     </select>
                     <select class="form-select" id="typeFilterM" onchange="syncMobileFilter('typeFilter','typeFilterM');filterOrders();updateFilterCount()">
                         <option value="">All Types</option>
-                        <option value="delivery">🚚 Delivery</option>
-                        <option value="pickup">🚶 Pickup</option>
+                        <option value="delivery">ðŸšš Delivery</option>
+                        <option value="pickup">ðŸš¶ Pickup</option>
                     </select>
                 </div>
                 <div class="filter-panel-row">
@@ -158,9 +158,9 @@
             <div class="modal-header">
                 <div>
                     <div class="modal-title"><i data-lucide="package" class="lucide-icon icon-bounce"></i> Order Details</div>
-                    <div style="font-size:12px;color:#8E8E93;" id="modalOrderId">—</div>
+                    <div style="font-size:12px;color:#8E8E93;" id="modalOrderId">â€”</div>
                 </div>
-                <button class="modal-close" onclick="closeModal('orderModal')">✕</button>
+                <button class="modal-close" onclick="closeModal('orderModal')">âœ•</button>
             </div>
             <div id="orderModalContent"></div>
         </div>
@@ -169,7 +169,7 @@
     <script>
     var allOrders = [];
 
-    // ── Mobile Filter Panel helpers ──────────────────────────
+    // â”€â”€ Mobile Filter Panel helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function toggleOrderFilters() {
         var panel = document.getElementById('orderFilterPanel');
         panel.classList.toggle('open');
@@ -308,6 +308,19 @@
                 allOrders = allOrders.filter(function(o) { return o.id !== id; });
                 filterOrders();
             });
+        } else if (CONFIG.DB_PROVIDER === 'cf_db') {
+            fetch((CONFIG.VERCEL_API_BASE||'')+'/api/delete-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            }).then(function(r) { return r.json(); }).then(function(res) {
+                if (!res.success) { showToast('Failed to delete: ' + res.error, 'error'); return; }
+                showToast('Order deleted successfully!', 'success');
+                allOrders = allOrders.filter(function(o) { return o.id !== id; });
+                filterOrders();
+            }).catch(function(err) {
+                showToast('Failed to delete: ' + err.message, 'error');
+            });
         } else if (CONFIG.DB_PROVIDER === 'appwrite') {
             appwriteDatabases.deleteDocument(APP_DB, 'orders', id)
             .then(function() {
@@ -376,16 +389,16 @@
         var html = '';
         orders.forEach(function(o) {
             var itemCount = Array.isArray(o.items) ? o.items.length : '?';
-            var typeBadge = (o.order_type === 'pickup') ? '<span class="badge" style="background:rgba(255,149,0,0.15);color:#FF9500;font-size:10px;padding:2px 6px;">🚶 Pickup</span>' : '';
+            var typeBadge = (o.order_type === 'pickup') ? '<span class="badge" style="background:rgba(255,149,0,0.15);color:#FF9500;font-size:10px;padding:2px 6px;">ðŸš¶ Pickup</span>' : '';
             html += '<tr>' +
                 '<td><code style="color:#007AFF;font-size:12px;">' + o.id + '</code> ' + typeBadge + '</td>' +
                 '<td>' +
-                    '<div style="font-weight:600;">' + (o.customer_name || '—') + '</div>' +
+                    '<div style="font-weight:600;">' + (o.customer_name || 'â€”') + '</div>' +
                     '<div style="font-size:12px;color:#8E8E93;">' + (o.customer_phone || '') + '</div>' +
                 '</td>' +
                 '<td style="font-weight:700;">' + formatMoney(o.grand_total) + '</td>' +
                 '<td>' + payBadge(o.payment_status) + '</td>' +
-                '<td style="font-size:12px;color:#8E8E93;">' + (o.payment_method || '—') + '</td>' +
+                '<td style="font-size:12px;color:#8E8E93;">' + (o.payment_method || 'â€”') + '</td>' +
                 '<td>' + statusBadge(o.status) + '</td>' +
                 '<td style="font-size:12px;color:#8E8E93;">' + formatDate(o.created_at) + '</td>' +
                 '<td>' +
@@ -407,8 +420,8 @@
             return '<div class="order-item-row">' +
                 '<img src="' + (item.image || '') + '" class="order-item-img" onerror="this.style.display=\'none\'">' +
                 '<div style="flex:1;">' +
-                    '<div style="font-weight:600;">' + (item.productName || item.name || '—') + '</div>' +
-                    '<div style="font-size:12px;color:#8E8E93;">Color: ' + (item.color||'—') + ' | Size: ' + (item.size||'—') + ' | Qty: ' + (item.quantity||1) + '</div>' +
+                    '<div style="font-weight:600;">' + (item.productName || item.name || 'â€”') + '</div>' +
+                    '<div style="font-size:12px;color:#8E8E93;">Color: ' + (item.color||'â€”') + ' | Size: ' + (item.size||'â€”') + ' | Qty: ' + (item.quantity||1) + '</div>' +
                 '</div>' +
                 '<div style="font-weight:700;">' + formatMoney((item.price||0) * (item.quantity||1)) + '</div>' +
             '</div>';
@@ -416,19 +429,19 @@
 
         var content =
             '<div class="detail-grid">' +
-                '<div class="detail-block"><label>Customer</label><span>' + (o.customer_name||'—') + '</span></div>' +
-                '<div class="detail-block"><label>Phone</label><span>' + (o.customer_phone||'—') + '</span></div>' +
-                '<div class="detail-block"><label>Email</label><span>' + (o.customer_email||'—') + '</span></div>' +
-                '<div class="detail-block"><label>Division</label><span>' + (o.division||'—') + '</span></div>' +
-                '<div class="detail-block"><label>District</label><span>' + (o.district||'—') + '</span></div>' +
-            '<div class="detail-block"><label>Upazila</label><span>' + (o.upazila||'—') + '</span></div>' +
-                '<div class="detail-block"><label>Order Type</label><span style="font-weight:700;color:' + (o.order_type === 'pickup' ? '#FF9500' : '#007AFF') + ';">' + ((o.order_type === 'pickup') ? '🚶 Pickup from Store' : '🚚 Delivery') + '</span></div>' +
-                '<div class="detail-block" style="grid-column:1/-1"><label>Address</label><span>' + (o.address||'—') + '</span></div>' +
+                '<div class="detail-block"><label>Customer</label><span>' + (o.customer_name||'â€”') + '</span></div>' +
+                '<div class="detail-block"><label>Phone</label><span>' + (o.customer_phone||'â€”') + '</span></div>' +
+                '<div class="detail-block"><label>Email</label><span>' + (o.customer_email||'â€”') + '</span></div>' +
+                '<div class="detail-block"><label>Division</label><span>' + (o.division||'â€”') + '</span></div>' +
+                '<div class="detail-block"><label>District</label><span>' + (o.district||'â€”') + '</span></div>' +
+            '<div class="detail-block"><label>Upazila</label><span>' + (o.upazila||'â€”') + '</span></div>' +
+                '<div class="detail-block"><label>Order Type</label><span style="font-weight:700;color:' + (o.order_type === 'pickup' ? '#FF9500' : '#007AFF') + ';">' + ((o.order_type === 'pickup') ? 'ðŸš¶ Pickup from Store' : 'ðŸšš Delivery') + '</span></div>' +
+                '<div class="detail-block" style="grid-column:1/-1"><label>Address</label><span>' + (o.address||'â€”') + '</span></div>' +
             '</div>' +
 
             '<div class="order-items-list">' + itemsHtml + '</div>' +
 
-            (o.addons && o.addons !== 'None' ? '<div style="background:rgba(255,149,0,0.08);border:1.5px solid rgba(255,149,0,0.25);border-radius:12px;padding:12px;margin-top:12px;font-size:13px;"><b style="color:#FF9500;">🎁 Selected Add-ons & Add-Once:</b><div style="font-weight:600;margin-top:4px;color:#eee;">' + o.addons + '</div></div>' : '') +
+            (o.addons && o.addons !== 'None' ? '<div style="background:rgba(255,149,0,0.08);border:1.5px solid rgba(255,149,0,0.25);border-radius:12px;padding:12px;margin-top:12px;font-size:13px;"><b style="color:#FF9500;">ðŸŽ Selected Add-ons & Add-Once:</b><div style="font-weight:600;margin-top:4px;color:#eee;">' + o.addons + '</div></div>' : '') +
 
             '<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:14px;margin-top:12px;">' +
                 '<div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px;"><span>Subtotal</span><span>' + formatMoney(o.subtotal) + '</span></div>' +
@@ -441,7 +454,7 @@
 
             '<div style="background:rgba(0,122,255,0.08);border:1px solid rgba(0,122,255,0.15);border-radius:12px;padding:14px;margin-top:12px;">' +
                 '<div style="font-size:12px;font-weight:700;color:#007AFF;margin-bottom:8px;"><i data-lucide="credit-card" class="lucide-icon icon-bounce"></i> Payment Info</div>' +
-                '<div style="font-size:13px;"><b>Method:</b> ' + (o.payment_method||'—') + ' | <b>Status:</b> ' + (o.payment_status||'—') + '</div>' +
+                '<div style="font-size:13px;"><b>Method:</b> ' + (o.payment_method||'â€”') + ' | <b>Status:</b> ' + (o.payment_status||'â€”') + '</div>' +
                 (o.payment_sender ? '<div style="font-size:13px;margin-top:4px;"><b>Sender:</b> <code>' + o.payment_sender + '</code></div>' : '') +
                 (o.payment_trx_id ? '<div style="font-size:13px;margin-top:4px;"><b>TrxID:</b> <code>' + o.payment_trx_id + '</code></div>' : '') +
             '</div>' +
@@ -465,7 +478,7 @@
                 '</div>' +
                 '<input class="form-input" id="updateTrackUrl" placeholder="Tracking URL (optional)" value="' + (o.tracking_url||'') + '" style="margin-bottom:10px;">' +
                 '<input class="form-input" id="updateNote" placeholder="Admin note (private)" value="' + (o.admin_note||'') + '" style="margin-bottom:10px;">' +
-                '<button class="btn btn-primary btn-full" onclick="updateOrder(\'' + o.id + '\')">💾 Update Order</button>' +
+                '<button class="btn btn-primary btn-full" onclick="updateOrder(\'' + o.id + '\')">ðŸ’¾ Update Order</button>' +
             '</div>';
 
         document.getElementById('orderModalContent').innerHTML = content;
@@ -528,7 +541,7 @@
 
                                 supabaseClient.from('promos').insert([newPromoPayload]).then(function(insertRes) {
                                     if (insertRes.error) { console.error('Error generating repeated customer coupon:', insertRes.error); }
-                                    else { showToast('🎉 Personal coupon created for customer: ' + phone, 'success'); }
+                                    else { showToast('ðŸŽ‰ Personal coupon created for customer: ' + phone, 'success'); }
                                 });
                             } catch (e) {
                                 console.error('Error parsing repeated customer promo config:', e);
@@ -590,13 +603,66 @@
                                 };
                                 appwriteDatabases.createDocument(APP_DB, 'promos', AppwriteID.unique(), newPromoPayload)
                                 .then(function() {
-                                    showToast('🎉 Personal coupon created for: ' + phone, 'success');
+                                    showToast('ðŸŽ‰ Personal coupon created for: ' + phone, 'success');
                                 }).catch(function(e) { console.error('Coupon gen error:', e.message); });
                             } catch (e) { console.error('Repeat config parse error:', e); }
                         }
                     }).catch(function(e) { console.error('Promos load error:', e.message); });
                 }
 
+                showToast('Order updated!', 'success');
+                closeModal('orderModal');
+                var idx = allOrders.findIndex(function(o) { return o.id === orderId; });
+                if (idx > -1) Object.assign(allOrders[idx], payload);
+                filterOrders();
+            }).catch(function(err) {
+                showToast('Update failed: ' + err.message, 'error');
+            });
+        } else if (CONFIG.DB_PROVIDER === 'cf_db') {
+            fetch((CONFIG.VERCEL_API_BASE||'')+'/api/update-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: orderId, upData: payload })
+            }).then(function(r) { return r.json(); }).then(function(res) {
+                if (!res.success) { showToast('Update failed: ' + res.error, 'error'); return; }
+                
+                if (payload.status === 'Delivered' && currentOrder && currentOrder.customer_phone) {
+                    var phone = currentOrder.customer_phone.trim();
+                    fetch("/api/d1-query", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + CONFIG.CF_D1_READ_TOKEN }, body: JSON.stringify({ sql: "SELECT * FROM promos" }) })
+                    .then(r => r.json()).then(d => {
+                        if (d.success && d.result && d.result[0].results) {
+                            var promosList = d.result[0].results;
+                            var repConfig = promosList.find(function(p) { return p.code && p.code.startsWith('REPEATED_CUSTOMER_CONFIG'); });
+                            var existingCoupon = promosList.find(function(p) { return p.code && p.code.split('|v1|')[0] === phone; });
+                            
+                            if (repConfig && repConfig.is_active && !existingCoupon) {
+                                try {
+                                    var meta = JSON.parse(repConfig.code.split('|v1|')[1]);
+                                    var expiry = null;
+                                    if (meta.repExpiryDays) {
+                                        var d = new Date(); d.setDate(d.getDate() + parseInt(meta.repExpiryDays));
+                                        expiry = d.toISOString();
+                                    }
+                                    
+                                    var newPromoMeta = {
+                                        type: 'private',
+                                        disc_type: meta.repType || 'flat',
+                                        disc_val: parseFloat(meta.repValue) || 0,
+                                        max_cap: parseFloat(meta.repCap) || null,
+                                        min_spend: parseFloat(meta.repMinSpend) || null,
+                                        del_reward: meta.repDelReward || 'none',
+                                        is_repeated_cust: true
+                                    };
+                                    var fullCode = phone + '|v1|' + JSON.stringify(newPromoMeta);
+                                    
+                                    var insertQ = "INSERT INTO promos (code, discount, is_active, expires_at) VALUES (?, ?, ?, ?)";
+                                    fetch("/api/d1-query", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + CONFIG.CF_D1_READ_TOKEN }, body: JSON.stringify({ sql: insertQ, params: [fullCode, meta.repType === 'flat' ? parseFloat(meta.repValue) : 0, 1, expiry] }) }).then(function() { showToast('ðŸŽ‰ Personal coupon created for customer: ' + phone, 'success'); });
+                                } catch (e) { console.error('Error generating repeated customer coupon:', e); }
+                            }
+                        }
+                    });
+                }
+                
                 showToast('Order updated!', 'success');
                 closeModal('orderModal');
                 var idx = allOrders.findIndex(function(o) { return o.id === orderId; });
@@ -624,5 +690,6 @@
     <script src="../assets/js/offline-handler.js"></script>
 </body>
 </html>
+
 
 

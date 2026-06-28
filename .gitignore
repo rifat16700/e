@@ -13,3 +13,6 @@ desktop.ini
 
 # Node (just in case)
 node_modules/
+
+# Ignore kilo tool directory
+.kilo/

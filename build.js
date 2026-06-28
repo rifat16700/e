@@ -20,10 +20,15 @@ var CONFIG = {
     APPWRITE_PROJECT:     '${s(process.env.APPWRITE_PROJECT)}',
     APPWRITE_DATABASE_ID: '${s(process.env.APPWRITE_DATABASE_ID)}',
 
-    // ── Cloudflare D1 (Read Only) ────────────────────────────
+    // ── Cloudflare D1 (Read Only via _redirects proxy) ───────
     CF_ACCOUNT_ID:    '${s(process.env.CF_ACCOUNT_ID)}',
     CF_DB_ID:         '${s(process.env.CF_DB_ID)}',
     CF_D1_READ_TOKEN: '${s(process.env.CF_D1_READ_TOKEN)}',
+
+    // ── Vercel Write API Base URL ─────────────────────────────
+    // Set VERCEL_API_BASE in Cloudflare Pages env vars
+    // Example: https://your-project-name.vercel.app
+    VERCEL_API_BASE: '${s(process.env.VERCEL_API_BASE)}',
 
     // ── Frontend Constants ───────────────────────────────────
     CART_KEY:         'fbr_cart',
@@ -32,6 +37,7 @@ var CONFIG = {
     ADMIN_PATH:       '/admin',
 };
 `;
+
 
 const configPath = path.join(__dirname, 'assets', 'js', 'config.js');
 fs.writeFileSync(configPath, configJs, 'utf8');
